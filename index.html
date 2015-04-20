@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='bestRestaurant'>
+    <head>
+        <title>Best Restaurants</title>
+        <script src="lib/angular.js"></script>
+        <script src="js/app.js"></script>
+        <script src='js/RestaurantController.js'></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container" ng-controller='RestaurantCtrl'>
+            <div class='row'>
+                <div class="col-xs-6">
+
+                    <h2>New Restaurant</h2>
+                    <form ng-submit="addRestaurant()" class="form-inline" role="form">
+                            <div class="form-group">
+                                <input type="text" ng-model="restName" class="form-control" placeholder="Enter name" required>
+                                <input type="text" ng-model="restCuisine" class="form-control" placeholder="Enter cuisine" required>
+                                <input type="text" ng-model="restLocation" class="form-control" placeholder="Enter location" required>
+                                <input type="text" ng-model="restPrice" class="form-control" placeholder="Enter price" required>
+                            </div>
+                            <button type="submit" class="btn btn-info">Add Restaurant</button>
+                    </form>
+                </div>
+                <h2>Restaurants: </h2>
+                <ul>
+                    <li ng-repeat='item in restaurants'>
+                        {{ item.name }}
+                        <ul>
+                            <li>{{ item.cuisine }}</li>
+                            <li>{{ item.location }}</li>
+                            <li>{{ item.price }}</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+
+
+
+        </div>
+    </body>
+</html>
