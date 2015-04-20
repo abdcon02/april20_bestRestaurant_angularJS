@@ -23,20 +23,49 @@
                             <button type="submit" class="btn btn-info">Add Restaurant</button>
                     </form>
                 </div>
-                <h2>Restaurants: </h2>
-                <ul>
-                    <li ng-repeat='item in restaurants'>
-                        {{ item.name }}
-                        <ul>
-                            <li>{{ item.cuisine }}</li>
-                            <li>{{ item.location }}</li>
-                            <li>{{ item.price }}</li>
-                        </ul>
-                    </li>
-                </ul>
-
             </div>
 
+            <div class="row">
+                <div class="col-xs-6">
+                    <h2 ng-show="restaurants.length && filtered.length">Restaurants: </h2>
+                    <h2 ng-show="restaurants.length && !filtered.length">No Matches </h2>
+                    <ul>
+                        <li ng-repeat='item in filtered = (restaurants | filter:query)'>
+                            <span ng-click="editing = true" ng-hide="editing">
+                                {{ item.name }} <button class="btn btn-xs btn-warning" ng-click="deleteRestaurant(item)">x</button>
+                            </span>
+                            <span ng-hide="editing">
+                                <ul>
+                                    <li>{{ item.cuisine }}</li>
+                                    <li>{{ item.location }}</li>
+                                    <li>$ {{ item.price }}</li>
+                                </ul>
+                            </span>
+                            <span class="form-group" ng-show="editing" ng-submit="editing = false">
+                                <form class="form-inline" role="form">
+                                    <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
+                                    <input type="text" class="form-control input-sm" ng-model="item.cuisine" placeholder="Cuisine" required/>
+                                    <input type="text" class="form-control input-sm" ng-model="item.location" placeholder="Location" required/>
+                                    <input type="text" class="form-control input-sm" ng-model="item.price" placeholder="Price" required/>
+
+                                    <button class="btn btn-info btn-sm" type="submit">Save</button>
+                                </form>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <h2>Search Restaurants</h2>
+                    <form class="form-inline" role='form'>
+                        <div class='form-group'>
+                            <input ng-model="query" type='text' class='form-control' placeholder='search'>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
 
 
